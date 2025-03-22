@@ -2298,12 +2298,10 @@ end)
 -- minesweeper
 
 local function createMinesweeper(gridSize, numMines)
-    -- Setup
     local screenGui = library:create("ScreenGui", {
         Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     })
 
-    -- Create UI frame for Minesweeper
     local mine = library:create("Frame", {
         Parent = library.gui,
         Name = "MinesweeperFrame",
@@ -2312,12 +2310,11 @@ local function createMinesweeper(gridSize, numMines)
         AnchorPoint = Vector2.new(0, 0),
         Position = UDim2.new(0, 50, 0, 50),
         BorderColor3 = Color3.fromRGB(8, 8, 8),
-        Size = UDim2.new(0, 400, 0, 400),
+        Size = UDim2.new(0, 358, 0, 400),
         BackgroundColor3 = Color3.fromRGB(56, 56, 56)
     })
     library:make_resizable(mine)
     
-    -- Title
     local name = library:create("TextLabel", {
         Parent = mine,
         Text = "Minesweeper",
@@ -2332,7 +2329,33 @@ local function createMinesweeper(gridSize, numMines)
         BackgroundTransparency = 1
     })
 
-    -- Main UI for grid
+ local glow = library:create("ImageLabel", {
+                    Parent = mine,
+                    Name = "",
+                    ImageColor3 = themes.preset.accent,
+                    ScaleType = Enum.ScaleType.Slice,
+                    ImageTransparency = 0.8999999761581421,
+                    BorderColor3 = Color3.fromRGB(0, 0, 0),
+                    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                    Image = "http://www.roblox.com/asset/?id=18245826428",
+                    BackgroundTransparency = 1,
+                    Position = UDim2.new(0, -20, 0, -20),
+                    Size = UDim2.new(1, 40, 0, 42),
+                    ZIndex = 2,
+                    BorderSizePixel = 0,
+                    SliceCenter = Rect.new(Vector2.new(21, 21), Vector2.new(79, 79))
+                })  
+
+
+local accent_line = library:create("Frame", {
+                    Parent = mine,
+                    Name = "",
+                    BorderColor3 = Color3.fromRGB(34, 34, 34),
+                    Size = UDim2.new(1, 0, 0, 2),
+                    BorderSizePixel = 0,
+                    BackgroundColor3 = themes.preset.accent 
+                })
+
     local main = library:create("Frame", {
         Parent = mine,
         Position = UDim2.new(0, 4, 0, 4),
@@ -2342,7 +2365,6 @@ local function createMinesweeper(gridSize, numMines)
         BackgroundColor3 = Color3.fromRGB(26, 26, 26)
     })
 
-    -- Create tabs for grid
     local tabs = library:create("Frame", {
         Parent = main,
         Position = UDim2.new(0, 8, 0, 8),
@@ -2352,7 +2374,6 @@ local function createMinesweeper(gridSize, numMines)
         BackgroundColor3 = Color3.fromRGB(22, 22, 22)
     })
     
-    -- Helper to create a button (used for Minesweeper grid)
     local function createButton(row, col)
         local button = library:create("TextButton", {
             Parent = tabs,
@@ -2366,11 +2387,9 @@ local function createMinesweeper(gridSize, numMines)
             BorderColor3 = Color3.fromRGB(56, 56, 56),
         })
 
-        -- Return button for tracking
         return button
     end
 
-    -- Game grid setup
     local grid = {}
     for row = 1, gridSize do
         grid[row] = {}
@@ -2379,7 +2398,6 @@ local function createMinesweeper(gridSize, numMines)
         end
     end
 
-    -- Place mines in the grid
     local mines = {}
     local function placeMines()
         local count = 0
