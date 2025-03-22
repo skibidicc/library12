@@ -2427,31 +2427,7 @@ local accent_line = library:create("Frame", {
         return count
     end
 
-    local function checkWin()
-        local safeCells = gridSize * gridSize - numMines
-        local revealedCells = 0
-
-        for row = 1, gridSize do
-            for col = 1, gridSize do
-                if revealed[row] and revealed[row][col] then
-                    revealedCells = revealedCells + 1
-                end
-            end
-        end
-
-        if revealedCells == safeCells then
-            local winLabel = library:create("TextLabel", {
-                Parent = parent,
-                Text = "You Win!",
-                Font = library.font,
-                TextColor3 = Color3.fromRGB(0, 255, 0),
-                BackgroundTransparency = 1,
-                Size = UDim2.new(1, 0, 0, 40),
-                Position = UDim2.new(0, 0, 0.5, -20)
-            })
-            gameOver = true
-        end
-    end
+   
 
     -- Reveal a cell
     local revealed = {}
