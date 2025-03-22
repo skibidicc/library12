@@ -5472,13 +5472,4 @@ end)
 
 local flags = library.flags -- access flags from here.
 
-local window = library:window({
-    name = "Wanted.net", 
-    size = UDim2.fromOffset(800, 650) 
-}) 
 
-local combat = window:tab({name = "COMBAT"})
-local esp = window:tab({name = "VISUALS"})
-local miscsec = window:tab({name = "MISC"})
-local localsec = window:tab({name = "LOCAL"})
-local configs = window:tab({name = "SETTINGS"})
